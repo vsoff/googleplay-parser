@@ -40,9 +40,9 @@ function addApplication(key, data) {
     row.setAttribute('data-toggle', 'modal');
     row.setAttribute('data-target', '#myModal');
 
+    row.appendChild(c3);
     row.appendChild(c1);
     row.appendChild(c2);
-    row.appendChild(c3);
     row.appendChild(c4);
 
     row.onclick = function () {
