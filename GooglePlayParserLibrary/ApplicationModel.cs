@@ -25,11 +25,11 @@ namespace GooglePlayParser.Models
         /// <summary>
         /// Средняя оценка.
         /// </summary>
-        public string Rating { get; set; }
+        public double Rating { get; set; }
         /// <summary>
         /// Количество оценок.
         /// </summary>
-        public string RatingCount { get; set; }
+        public int RatingCount { get; set; }
         /// <summary>
         /// Количество установок.
         /// </summary>
@@ -53,7 +53,7 @@ namespace GooglePlayParser.Models
         /// <summary>
         /// Стоимость приложения (цена).
         /// </summary>
-        public string Price { get; set; }
+        public int Price { get; set; }
         /// <summary>
         /// Цена внутренних покупок.
         /// </summary>

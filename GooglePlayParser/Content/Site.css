@@ -22,3 +22,26 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.preview div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*white-space: nowrap;*/
+}
+
+.app-icon {
+    width: 100px;
+    height: 100px;
+}
+
+.app-item {
+    border: 1px solid #dbe1ff;
+    background: #f6f7ff;
+    padding: 3px;
+}
+
+    .app-item:hover {
+        background: #f2ebff;
+        cursor: pointer;
+        user-select: none;
+    }

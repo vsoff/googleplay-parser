@@ -3,20 +3,17 @@
 }
 <h2>@ViewBag.Title</h2>
 
-<div class="row">
-    Что-то
-</div>
 
 <div class="row">
-    <div class="col-md-4">
-        тест1
-    </div>
-    <div class="col-md-4">
-        тест2
-    </div>
-    <div class="col-md-4">
-        тест3
-    </div>
+    Имя пакета или ссылка на <b>Google Play</b>:
+    <p>
+        <input class="form-control" id="package-name" />
+    </p>
+    <p>
+        <button class="btn btn-success" id="package-find">Показать информацию</button>
+    </p>
 </div>
+
+<div style="display: none" id="error-msg" class="alert alert-danger" role="alert"></div>
 
 @Scripts.Render("~/js/app-info.js")
