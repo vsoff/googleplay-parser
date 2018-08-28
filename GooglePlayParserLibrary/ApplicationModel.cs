@@ -65,11 +65,9 @@ namespace GooglePlayParser.Models
 
         public bool Verify()
         {
-            return !(this.PackageName == null || this.Name == null || this.InternalPrice == null
-                || this.Description == null || this.Price == null || this.Screenshots == null
-                || this.RatingCount == null || this.Rating == null || this.UpdateTime == null
-                || this.InstallCount == null || this.Icon == null || this.Email == null
-                || this.WhatsNew == null);
+            return !(this.PackageName == null || this.Name == null || this.Description == null
+                || this.Screenshots == null || this.UpdateTime == null || this.Email == null
+                || this.InstallCount == null || this.Icon == null);
         }
     }
 }

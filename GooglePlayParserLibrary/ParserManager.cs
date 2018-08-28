@@ -30,15 +30,26 @@ namespace GooglePlayParserLibrary
         {
             // Ищем необходимые поля в документе...
             ApplicationModel data = new ApplicationModel();
-
             data.PackageName = packageName;
             data.Name = doc.DocumentNode.SelectSingleNode("//h1[contains(@class, 'AHFaub')]")?.InnerText;
             data.Icon = doc.DocumentNode.SelectSingleNode("//img[contains(@class, 'T75of ujDFqe')]")?.GetAttributeValue("src", "");
-            data.Description = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'DWPxHb')]")?.InnerText;
-            data.InternalPrice = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'hAyfc')][8]/span/div")?.InnerText;
-            data.InstallCount = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'hAyfc')][3]/span")?.InnerText;
+            data.Description = WebUtility.HtmlDecode(doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'DWPxHb')]")?.InnerText);
 
-            data.WhatsNew = doc.DocumentNode.SelectNodes("//*[contains(@class, 'DWPxHb')]")?[1]?.InnerText;
+            var nodes1 = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')]");
+            foreach (var node in nodes1)
+            {
+                string header = node.ChildNodes[0].InnerText;
+                switch (header)
+                {
+                    case "Updated": data.UpdateTime = DateTime.Parse(node.ChildNodes[1].InnerText).ToShortDateString(); break;
+                    case "Installs": data.InstallCount = node.ChildNodes[1].InnerText; break;
+                    case "In-app Products": data.InternalPrice = node.ChildNodes[1].InnerText; break;
+                }
+            }
+
+            var news = doc.DocumentNode.SelectNodes("//*[contains(@class, 'DWPxHb')]");
+            if (news != null && news.Count > 1)
+                data.WhatsNew = news[1]?.InnerText;
             data.Email = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')]/span/div/span/div[2]")?[1]?.InnerText;
 
             string ratingCount = doc.DocumentNode.SelectSingleNode("//span[contains(@class, 'EymY4b')]/span[2]")?.InnerText;
@@ -55,7 +66,8 @@ namespace GooglePlayParserLibrary
                 var date1 = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')][1]/span/div/span");
                 string updateTime = date1[0]?.InnerText;
                 data.UpdateTime = DateTime.Parse(updateTime).ToShortDateString();
-            } catch
+            }
+            catch
             {
                 var date2 = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')][2]/span/div/span");
                 string updateTime = date2[0]?.InnerText;

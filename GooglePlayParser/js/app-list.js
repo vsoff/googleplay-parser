@@ -5,31 +5,81 @@ function addApplication(key, data) {
         return;
     listItems[key] = data;
 
+    var colStyle = 'col-md-2'
+
     // cols elements
+    var el;
     var c1 = document.createElement('div');
-    var i = document.createElement('i');
-    i.classList = 'app-icon';
-    i.innerText = key;
-    c1.classList = 'col-md-3';
-    c1.appendChild(i);
+    el = document.createElement('b');
+    el.classList = 'app-icon';
+    el.innerText = data.Name;
+    c1.appendChild(el);
+    el = document.createElement('i');
+    el.classList = 'app-icon';
+    el.innerText = key;
+    c1.classList = colStyle;
+    c1.appendChild(document.createElement('br'));
+    c1.appendChild(el);
 
     var c2 = document.createElement('div');
-    var b = document.createElement('b');
-    b.classList = 'app-icon';
-    b.innerText = data.Name;
-    c2.classList = 'col-md-3';
-    c2.appendChild(b);
+    el = document.createElement('img');
+    el.classList = 'app-icon';
+    el.src = data.Icon;
+    c2.classList = colStyle;
+    c2.appendChild(el);
 
     var c3 = document.createElement('div');
-    var img = document.createElement('img');
-    img.classList = 'app-icon';
-    img.src = data.Icon;
-    c3.classList = 'col-md-3';
-    c3.appendChild(img);
+    c3.classList = colStyle;
+    el = document.createElement('b');
+    el.innerText = 'Описание:'
+    c3.appendChild(el);
+    el = document.createElement('p');
+    el.classList = 'preview';
+    el.innerText = data.Description.length > 100 ? data.Description.substring(0, 100) + '...' : data.Description;
+    c3.appendChild(el);
 
     var c4 = document.createElement('div');
-    c4.classList = 'col-md-3';
-    c4.innerText = data.Description.substring(0, 100);
+    c4.classList = colStyle;
+    if (data.InternalPrice) {
+        el = document.createElement('p');
+        el.innerText = 'Внутренние покупки: ' + data.InternalPrice
+        c4.appendChild(el);
+    }
+    el = document.createElement('p');
+    el.innerText = 'Кол-во установок: ' + data.InstallCount
+    c4.appendChild(el);
+    el = document.createElement('p');
+    el.innerText = 'Кол-во оценок: ' + data.RatingCount
+    c4.appendChild(el);
+    el = document.createElement('p');
+    el.innerText = 'Средняя оценка: ' + data.Rating
+    c4.appendChild(el);
+    el = document.createElement('p');
+    el.innerText = 'Цена: ' + (data.Price == 0 ? 'бесплатно' : data.Price)
+    c4.appendChild(el);
+
+    var c5 = document.createElement('div');
+    c5.classList = colStyle;
+    el = document.createElement('b');
+    el.innerText = 'Что нового:'
+    c5.appendChild(el);
+    el = document.createElement('p');
+    el.classList = 'preview';
+    if (data.WhatsNew)
+        el.innerText = data.WhatsNew.length > 100 ? data.WhatsNew.substring(0, 100) + '...' : data.WhatsNew;
+    else
+        el.innerText = 'Новостей нет.';
+    c5.appendChild(el);
+
+    var c6 = document.createElement('div');
+    c6.classList = colStyle;
+    el = document.createElement('b');
+    el.innerText = 'Email'
+    c6.appendChild(el);
+    el = document.createElement('p');
+    el.classList = 'preview';
+    el.innerText = data.Email
+    c6.appendChild(el);
 
     // row element
     var row = document.createElement('div');
@@ -40,10 +90,12 @@ function addApplication(key, data) {
     row.setAttribute('data-toggle', 'modal');
     row.setAttribute('data-target', '#myModal');
 
-    row.appendChild(c3);
-    row.appendChild(c1);
     row.appendChild(c2);
+    row.appendChild(c1);
+    row.appendChild(c3);
     row.appendChild(c4);
+    row.appendChild(c5);
+    row.appendChild(c6);
 
     row.onclick = function () {
         var item = listItems[this.getAttribute('name')];

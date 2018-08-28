@@ -23,11 +23,17 @@ textarea {
     max-width: 280px;
 }
 
-.preview div {
+.preview {
     overflow: hidden;
     text-overflow: ellipsis;
     /*white-space: nowrap;*/
 }
+
+    .preview div {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*white-space: nowrap;*/
+    }
 
 .app-icon {
     width: 100px;

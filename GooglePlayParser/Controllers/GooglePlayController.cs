@@ -12,12 +12,12 @@ namespace GooglePlayParser.Controllers
 {
     public class GooglePlayController : ApiController
     {
-        private static Dictionary<string, ApplicationModel> _applications = new Dictionary<string, ApplicationModel>();
+        public static Dictionary<string, ApplicationModel> Applications = new Dictionary<string, ApplicationModel>();
 
         // GET: api/GooglePlay
         public object Get()
         {
-            return _applications;
+            return Applications;
         }
 
         // GET: api/GooglePlay?id=com.rockstargames.gtavc
@@ -28,7 +28,7 @@ namespace GooglePlayParser.Controllers
                 error = "Название пакета не может быть пустым!"
             };
 
-            if (!_applications.ContainsKey(id))
+            if (!Applications.ContainsKey(id))
             {
                 HtmlDocument doc = null;
 
@@ -52,7 +52,7 @@ namespace GooglePlayParser.Controllers
                         {
                             error = $"Объект собран не полностью."
                         };
-                    _applications[app.PackageName] = app;
+                    Applications[app.PackageName] = app;
                     return app;
                 }
                 catch (Exception ex)
@@ -63,7 +63,7 @@ namespace GooglePlayParser.Controllers
                     };
                 }
             }
-            return _applications[id];
+            return Applications[id];
         }
 
         // POST: api/GooglePlay
@@ -93,7 +93,7 @@ namespace GooglePlayParser.Controllers
                     {
                         error = $"Объект собран не полностью."
                     };
-                _applications[app.PackageName] = app;
+                Applications[app.PackageName] = app;
             }
             catch (Exception ex)
             {

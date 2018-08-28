@@ -6,6 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using GooglePlayParser.Models;
+using GooglePlayParser.Controllers;
+using HtmlAgilityPack;
+using GooglePlayParserLibrary;
 
 namespace GooglePlayParser
 {
@@ -14,6 +17,21 @@ namespace GooglePlayParser
         // Дополнительные сведения о настройке аутентификации см. на странице https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            string[] defaultApps = new string[] { "com.rockstargames.gtavc", "com.ovelin.guitartuna",
+                "ru.sberbankmobile", "com.bethsoft.theelderscrollslegends", "com.wolfram.android.alpha"};
+            foreach (var package in defaultApps)
+            {
+                try
+                {
+                    HtmlDocument doc = ParserManager.GetPageDocument(package);
+                    ApplicationModel curApp = ParserManager.GetApplicationData(doc, package);
+                    GooglePlayController.Applications[package] = curApp;
+                }
+                catch { }
+            }
+
+
+
             // Настройка контекста базы данных, диспетчера пользователей и диспетчера входа для использования одного экземпляра на запрос
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
@@ -34,7 +52,7 @@ namespace GooglePlayParser
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Позволяет приложению временно хранить информацию о пользователе, пока проверяется второй фактор двухфакторной проверки подлинности.
