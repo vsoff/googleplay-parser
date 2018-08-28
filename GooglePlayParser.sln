@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlayParser", "GooglePlayParser\GooglePlayParser.csproj", "{9F422FF0-DA4D-4DE8-882B-D78DE7449ECB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlayParserLibrary", "GooglePlayParserLibrary\GooglePlayParserLibrary.csproj", "{C9631FA8-2736-4B39-9FE3-541FC46A8E85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9F422FF0-DA4D-4DE8-882B-D78DE7449ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F422FF0-DA4D-4DE8-882B-D78DE7449ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F422FF0-DA4D-4DE8-882B-D78DE7449ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9631FA8-2736-4B39-9FE3-541FC46A8E85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9631FA8-2736-4B39-9FE3-541FC46A8E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9631FA8-2736-4B39-9FE3-541FC46A8E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9631FA8-2736-4B39-9FE3-541FC46A8E85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
