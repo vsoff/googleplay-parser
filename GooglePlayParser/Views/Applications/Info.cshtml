@@ -3,7 +3,6 @@
 }
 <h2>@ViewBag.Title</h2>
 
-
 <div class="row">
     Имя пакета или ссылка на <b>Google Play</b>:
     <p>
@@ -13,7 +12,25 @@
         <button class="btn btn-success" id="package-find">Показать информацию</button>
     </p>
 </div>
-
 <div style="display: none" id="error-msg" class="alert alert-danger" role="alert"></div>
+<div id="app-list" class="preview"></div>
+<!-- Модальное окно -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="supertitle-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 id="supertitle-modal" class="modal-title">Скриншоты</h4>
+            </div>
+            <div id="screenshots-modal" class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+@Scripts.Render("~/js/app-list.js")
 @Scripts.Render("~/js/app-info.js")

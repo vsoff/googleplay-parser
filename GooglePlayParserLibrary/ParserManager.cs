@@ -48,10 +48,20 @@ namespace GooglePlayParserLibrary
             data.Rating = Math.Round(double.Parse(rating.Replace('.', ',')), 2);
 
             string price = doc.DocumentNode.SelectSingleNode("//button[contains(@class, 'LkLjZd ScJHi HPiPcc IfEcue')]")?.InnerText;
-            data.Price = price == "Install" ? 0 : int.Parse(price.Split(' ')[1].Split('.')[0]);
+            data.Price = price == "Install" ? 0 : int.Parse(price.Split(new char[] { ' ', ' ' })[1].Split('.')[0]);
 
-            string updateTime = doc.DocumentNode.SelectSingleNode("//div[contains(@class, 'hAyfc')][1]/span/div/span")?.InnerText;
-            data.UpdateTime = DateTime.Parse(updateTime).ToShortDateString();
+            try
+            {
+                var date1 = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')][1]/span/div/span");
+                string updateTime = date1[0]?.InnerText;
+                data.UpdateTime = DateTime.Parse(updateTime).ToShortDateString();
+            } catch
+            {
+                var date2 = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hAyfc')][2]/span/div/span");
+                string updateTime = date2[0]?.InnerText;
+                data.UpdateTime = DateTime.Parse(updateTime).ToShortDateString();
+            }
+
 
             // Записываем все скриншоты
             List<string> screenshots = new List<string>();

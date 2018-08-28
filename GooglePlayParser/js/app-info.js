@@ -19,6 +19,8 @@
                 return;
             }
             // вывод данных
+            $('#app-list')[0].innerHTML = "";
+            addApplication(res.PackageName, res)
 
         }).fail(res => {
             console.log('fail', res);

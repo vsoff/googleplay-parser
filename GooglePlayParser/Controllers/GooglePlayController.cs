@@ -28,22 +28,22 @@ namespace GooglePlayParser.Controllers
                 error = "Название пакета не может быть пустым!"
             };
 
-            HtmlDocument doc = null;
-
-            try
-            {
-                doc = ParserManager.GetPageDocument(id);
-            }
-            catch (Exception ex)
-            {
-                return new
-                {
-                    error = $"Такого приложения на Google Play не существует."
-                };
-            }
-
             if (!_applications.ContainsKey(id))
             {
+                HtmlDocument doc = null;
+
+                try
+                {
+                    doc = ParserManager.GetPageDocument(id);
+                }
+                catch (Exception ex)
+                {
+                    return new
+                    {
+                        error = $"Такого приложения на Google Play не существует."
+                    };
+                }
+
                 try
                 {
                     ApplicationModel app = ParserManager.GetApplicationData(doc, id);
